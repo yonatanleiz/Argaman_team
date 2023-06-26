@@ -12,6 +12,4 @@ def parse():
     try:
         with open(sys.argv[FILENAME_INDEX]) as conf_file:
             conf_data = json.load(conf_file)
-
-if __name__ == "__main__":
-    parse()
+        return conf_data["routing"]

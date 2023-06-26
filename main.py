@@ -1,5 +1,7 @@
 from scapy.all import *
 import os
+import configuration_parser
+import filterCommunication
 
 interfaceMapping = {
     "eth0": "eth1",
@@ -19,14 +21,15 @@ def startup():
 
 
 def main():
+    ipTable = configuration_parser.parse("file-path")
+    
     while True:
         try:
             capture = sniff(count=1)[0]
 
-            # Do things.
-
             try:
-                srp(capture, iface=interfaceMapping[capture.sniffed_on])
+                if (filterCommunication.checkSrcAndDst(ipTable, capture):
+                    srp(capture, iface=interfaceMapping[capture.sniffed_on])
             except KeyError as E:
                 print("routing failed")
         except OSError as E:

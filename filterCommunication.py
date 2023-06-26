@@ -8,11 +8,11 @@ def checkSrcAndDst(ipTable, packet):
     """
     srcIp = packet[IP].src
     srcPort = packet[TCP].sport
-    destIp = packet[IP}.dst
+    destIp = packet[IP].dst
     destPort = packet[TCP].dport
     
-    srcSet = [srcIp, srcPort]
-    destSet = [destIp, destPort]
+    srcSet = (srcIp, srcPort)
+    destSet = (destIp, destPort)
     
     if (srcSet in ipTable):
         if (destSet == ipTable[srcSet]):
