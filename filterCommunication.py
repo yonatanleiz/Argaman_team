@@ -6,10 +6,10 @@ def checkSrcAndDst(ipTable, packet):
     Checks source (ip and port) and destination couple against allowed ip table.
     Returns True if passed check, False otherwise.
     """
-    srcIp = packet
-    srcPort = packet
-    destIp = packet
-    destPort = packet
+    srcIp = packet[IP].src
+    srcPort = packet[TCP].sport
+    destIp = packet[IP}.dst
+    destPort = packet[TCP].dport
     
     srcSet = [srcIp, srcPort]
     destSet = [destIp, destPort]
