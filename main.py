@@ -26,15 +26,17 @@ def main():
     while True:
         try:
             capture = sniff(count=1)[0]
-
-            try:
-                if (filterCommunication.checkSrcAndDst(ipTable, capture):
-                    srp(capture, iface=interfaceMapping[capture.sniffed_on])
-            except KeyError as E:
-                print("routing failed")
         except OSError as E:
             print("No open interfaces")
-            return
+            
+            
+def inspect_packet():
+    try:
+        if (filterCommunication.checkSrcAndDst(ipTable, capture):
+            srp(capture, iface=interfaceMapping[capture.sniffed_on])
+    except KeyError as E:
+        print("routing failed")
+    return
 
 
 if __name__ == '__main__':
