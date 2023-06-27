@@ -43,7 +43,6 @@ def main():
         command += " --sport " + key[1]
         command += " --dport " + ipTable[key][1]
         command += end
-        print(command)
         os.system(command)
         
 
