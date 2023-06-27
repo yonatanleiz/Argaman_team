@@ -29,6 +29,8 @@ def main():
     if not ipTable:
         print("exiting...")
         exit()
+        
+    #os.system("sudo iptables -t filter --append FORWARD -j DROP")
 
     command = ""
     start = "sudo iptables -t filter --append FORWARD"
