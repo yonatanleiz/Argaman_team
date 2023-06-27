@@ -2,7 +2,6 @@ from scapy.all import *
 import os
 import configuration_parser
 import filterCommunication
-import iptc
 
 FILE_PATH = "conf.json"
 
@@ -40,7 +39,7 @@ def main():
         command += start
         command += " -s " + key[0]
         command += " -d " + ipTable[key][0]
-        commend += " -p tcp"
+        command += " -p tcp"
         command += " --sport " + key[0]
         command += " --dport " + ipTable[key][0]
         command += end
