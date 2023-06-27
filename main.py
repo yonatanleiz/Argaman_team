@@ -6,8 +6,8 @@ import filterCommunication
 FILE_PATH = "conf.json"
 
 interfaceMapping = {
-    "ens33": "ens38",
-    "ens38": "ens33",
+    "ens3": "ens5",
+    "ens5": "ens3",
     "lo": "lo"
 }
 
