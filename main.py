@@ -44,11 +44,11 @@ def main():
     for key in ipTable:
         command = ""
         command += start
-        commend += " -p tcp"
         command += " -s " + key[0]
         command += " -d " + ipTable[key][0]
-        command += " -sport " + key[0]
-        command += " -dport " + ipTable[key][0]
+        commend += " -p tcp"
+        command += " --sport " + key[0]
+        command += " --dport " + ipTable[key][0]
         command += end
         os.system(command)
         
