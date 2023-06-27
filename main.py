@@ -31,8 +31,8 @@ def main():
         exit()
 
     command = ""
-    start = "sudo iptables -t filter --check FORWARD"
-    end = "-j ACCEPT"
+    start = "sudo iptables -t filter --append FORWARD"
+    end = " -j ACCEPT"
         
     for key in ipTable:
         command = ""
@@ -40,9 +40,10 @@ def main():
         command += " -s " + key[0]
         command += " -d " + ipTable[key][0]
         command += " -p tcp"
-        command += " --sport " + key[0]
-        command += " --dport " + ipTable[key][0]
+        command += " --sport " + key[1]
+        command += " --dport " + ipTable[key][1]
         command += end
+        print(command)
         os.system(command)
         
 
