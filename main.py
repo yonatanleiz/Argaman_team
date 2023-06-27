@@ -2,6 +2,7 @@ from scapy.all import *
 import os
 import configuration_parser
 import filterCommunication
+import iptc
 
 interfaceMapping = {
     "eth0": "eth1",
@@ -22,20 +23,18 @@ def startup():
 
 def main():
     ipTable = configuration_parser.parse("file-path")
-    chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "INPUT")
+    chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "FORWARD")
     
     for key in ipTable:
-    
-            
-            
-def inspect_packet():
-    try:
-        if (filterCommunication.checkSrcAndDst(ipTable, capture):
-            srp(capture, iface=interfaceMapping[capture.sniffed_on])
-    except KeyError as E:
-        print("routing failed")
-    return
-
+        rule =  iptc.Rule()
+        rule.protocol = "tcp"
+        rule.src = key[0]
+        rule.sport = key[1]
+        rule.dst = ipTable[key][0]
+        rule.dport = ipTable[key][1]
+        rule.target = iptc.Target(rule, "ACCEPT")
+        chain.insert_rule(rule)
+        
 
 if __name__ == '__main__':
     startup()
