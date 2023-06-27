@@ -1,15 +1,13 @@
 import sys
 import json
+from ast import literal_eval
 
-NUM_ARGS = 2
-FILENAME_INDEX = 1
 
-def parse():
-    if len(sys.argv) != NUM_ARGS:
-        print("invalid argument number")
-        exit()
-    
+def parse(file_name):
     try:
-        with open(sys.argv[FILENAME_INDEX]) as conf_file:
+        with open(file_name) as conf_file:
             conf_data = json.load(conf_file)
-        return conf_data["routing"]
+        python_dict = literal_eval(conf_data["routing"])
+        return python_dict
+    except Exception as ex:
+        print(ex)

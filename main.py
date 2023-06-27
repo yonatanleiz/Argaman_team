@@ -2,10 +2,14 @@ from scapy.all import *
 import os
 import configuration_parser
 import filterCommunication
+import iptc
+
+FILE_PATH = "conf.json"
 
 interfaceMapping = {
-    "eth0": "eth1",
-    "eth1": "eth0"
+    "ens33": "ens38",
+    "ens38": "ens33",
+    "lo": "lo"
 }
 
 
@@ -17,27 +21,32 @@ def startup():
 
     # enable interfaces
     for interface in interfaceMapping.keys(): 
+        os.system("ifconfig " + interface + " up")
         os.system("ip link set " + interface + " promisc on")
 
 
 def main():
-    ipTable = configuration_parser.parse("file-path")
-    
-    while True:
-        try:
-            capture = sniff(count=1)[0]
-        except OSError as E:
-            print("No open interfaces")
-            
-            
-def inspect_packet():
-    try:
-        if (filterCommunication.checkSrcAndDst(ipTable, capture):
-            srp(capture, iface=interfaceMapping[capture.sniffed_on])
-    except KeyError as E:
-        print("routing failed")
-    return
-
+    ipTable = configuration_parser.parse(FILE_PATH)
+    if not ipTable:
+        print("exiting...")
+        exit()
+        
+    chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "FORWARD")
+    chain.flush()
+    rule =  iptc.Rule()
+    rule.target = iptc.Target(rule, "DROP")
+    chain.insert_rule(rule)
+        
+    for key in ipTable:
+        rule =  iptc.Rule()
+        rule.protocol = "tcp"
+        rule.src = key[0]
+        rule.sport = key[1]
+        rule.dst = ipTable[key][0]
+        rule.dport = ipTable[key][1]
+        rule.target = iptc.Target(rule, "ACCEPT")
+        chain.insert_rule(rule)
+        
 
 if __name__ == '__main__':
     startup()
