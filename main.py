@@ -22,12 +22,10 @@ def startup():
 
 def main():
     ipTable = configuration_parser.parse("file-path")
+    chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "INPUT")
     
-    while True:
-        try:
-            capture = sniff(count=1)[0]
-        except OSError as E:
-            print("No open interfaces")
+    for key in ipTable:
+    
             
             
 def inspect_packet():
