@@ -4,9 +4,12 @@ import configuration_parser
 import filterCommunication
 import iptc
 
+FILE_PATH = "conf.json"
+
 interfaceMapping = {
-    "eth0": "eth1",
-    "eth1": "eth0"
+    "ens33": "ens38",
+    "ens38": "ens33",
+    "lo": "lo"
 }
 
 
@@ -18,13 +21,22 @@ def startup():
 
     # enable interfaces
     for interface in interfaceMapping.keys(): 
+        os.system("ifconfig " + interface + " up")
         os.system("ip link set " + interface + " promisc on")
 
 
 def main():
-    ipTable = configuration_parser.parse("file-path")
+    ipTable = configuration_parser.parse(FILE_PATH)
+    if not ipTable:
+        print("exiting...")
+        exit()
+        
     chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "FORWARD")
-    
+    chain.flush()
+    rule =  iptc.Rule()
+    rule.target = iptc.Target(rule, "DROP")
+    chain.insert_rule(rule)
+        
     for key in ipTable:
         rule =  iptc.Rule()
         rule.protocol = "tcp"
