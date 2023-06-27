@@ -46,7 +46,9 @@ def main():
         command += " --dport " + ipTable[key][1]
         command += end
         os.system(command)
-        
+    os.system("sudo iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT")
+    os.system("sudo iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT")
+
 
 if __name__ == '__main__':
     startup()
