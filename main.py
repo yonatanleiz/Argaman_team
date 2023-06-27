@@ -35,12 +35,6 @@ def main():
     start = "sudo iptables -t filter --check FORWARD"
     end = "-j ACCEPT"
         
-    chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "FORWARD")
-    chain.flush()
-    rule =  iptc.Rule()
-    rule.target = iptc.Target(rule, "DROP")
-    chain.insert_rule(rule)
-        
     for key in ipTable:
         command = ""
         command += start
