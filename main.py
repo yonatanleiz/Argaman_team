@@ -30,6 +30,10 @@ def main():
     if not ipTable:
         print("exiting...")
         exit()
+
+    command = ""
+    start = "sudo iptables -t filter --check FORWARD"
+    end = "-j ACCEPT"
         
     chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "FORWARD")
     chain.flush()
@@ -38,14 +42,15 @@ def main():
     chain.insert_rule(rule)
         
     for key in ipTable:
-        rule =  iptc.Rule()
-        rule.protocol = "tcp"
-        rule.src = key[0]
-        rule.sport = key[1]
-        rule.dst = ipTable[key][0]
-        rule.dport = ipTable[key][1]
-        rule.target = iptc.Target(rule, "ACCEPT")
-        chain.insert_rule(rule)
+        command = ""
+        command += start
+        commend += " -p tcp"
+        command += " -s " + key[0]
+        command += " -d " + ipTable[key][0]
+        command += " -sport " + key[0]
+        command += " -dport " + ipTable[key][0]
+        command += end
+        os.system(command)
         
 
 if __name__ == '__main__':
