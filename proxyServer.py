@@ -22,7 +22,7 @@ def proxy(path):
         abort(401, "Invalid source address")
 
     if json_validator.validate_json(json_data):
-        return get(f'http://{SITE_IP}:{PORT}/{path}').content  # make request to actual host
+        return get(f'https://{SITE_IP}:{PORT}/{path}').content  # make request to actual host
     else:
         abort(400, "Invalid json")
 
@@ -34,4 +34,4 @@ def start(site_ip, server_ip, port, schemas_path, cert_path, private_key_path):
     PORT = port
 
     json_validator = JsonValidator(schemas_path)
-    app.run(host=server_ip, port=port)
+    app.run(host=server_ip, port=port, ssl_context=(cert_path, private_key_path))
