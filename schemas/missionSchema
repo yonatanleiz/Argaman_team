@@ -29,13 +29,13 @@
       "missionStatus":{
          "type":"string",
          "enum":[
-            "SUCCEEDED"
+            "SUCCEEDED" , "PENDING"
          ]
       },
       "missionEssence":{
          "type":"string",
          "enum":[
-            "SURVEILLANCE"
+            "SURVEILLANCE", "BRAKE_IN"
          ]
       },
       "description":{
@@ -43,7 +43,7 @@
          "maxLength":50
       },
       "agent":{
-         "type":"object",
+         "type":["object", "null"],
          "properties":{
             "agent_key":{
                "type":"integer",
