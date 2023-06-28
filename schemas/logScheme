@@ -1,0 +1,257 @@
+{
+   "type":"object",
+   "minProperties":2,
+   "maxProperties":2,
+   "properties":{
+      "get":{
+         "type": ["object", "null"],
+         "minProperties":2,
+         "maxProperties":2,
+         "properties":{
+            "login":{
+               "type": ["object", "null"],
+               "minProperties":2,
+               "maxProperties":2,
+               "properties":{
+                  "id":{
+                     "type": ["string", "null"],
+                     "maxLength":20
+                  },
+                  "token":{
+                     "type": ["string", "null"],
+                     "maxLength":200
+                  }
+               },
+               "required":[
+                  "id",
+                  "token"
+               ]
+            },
+            "validate":{
+               "type": ["object", "null"],
+               "minProperties":18,
+               "maxProperties":18,
+               "properties":{
+                  "id":{
+                     "type": ["string", "null"],
+                     "maxLength":20
+                  },
+                  "firstName":{
+                     "type": ["string", "null"],
+                     "maxLength":20
+                  },
+                  "lastName":{
+                     "type": ["string", "null"],
+                     "maxLength":20
+                  },
+                  "birthDate":{
+                     "type": ["string", "null"],
+                     "maxLength":24,
+                     "minLength":20
+                  },
+                  "enlistmentDate":{
+                     "type": ["string", "null"],
+                     "maxLength":24,
+                     "minLength":20
+                  },
+                  "userName":{
+                     "type": ["string", "null"],
+                     "maxLength":20
+                  },
+                  "password":{
+                     "type": ["string", "null"],
+                     "maxLength":20
+                  },
+                  "phoneNumber":{
+                     "type": ["string", "null"],
+                     "maxLength":10
+                  },
+                  "job":{
+                     "type": ["string", "null"],
+                     "maxLength":20
+                  },
+                  "codeName":{
+                     "type": ["string", "null"],
+                     "maxLength":20
+                  },
+                  "weight":{
+                     "type": ["integer", "null"],
+                     "maximum":1000
+                  },
+                  "height":{
+                     "type": ["integer", "null"],
+                     "maximum":1000
+                  },
+                  "homeCountry":{
+                     "type": ["string", "null"],
+                     "maxLength":20
+                  },
+                  "lockedDate":{
+                     "type":[
+                        "string",
+                        "null"
+                     ],
+                     "maxLength":20
+                  },
+                  "isLocked":{
+                     "type":"boolean"
+                  },
+                  "status":{
+                     "type":[
+                        "string",
+                        "null"
+                     ],
+                     "maxLength":20
+                  },
+                  "isActive":{
+                     "type":"boolean"
+                  },
+                  "mission":{
+                     "type": ["object", "null"],
+                     "minProperties":8,
+                     "maxProperties":8,
+                     "properties":{
+                        "id":{
+                           "type": ["string", "null"],
+                           "maxLength":20
+                        },
+                        "essence":{
+                           "type": ["object", "null"],
+                           "minProperties":2,
+                           "maxProperties":2,
+                           "properties":{
+                              "name":{
+                                 "type": ["string", "null"],
+                                 "maxLength":20
+                              },
+                              "skills":{
+                                 "type": ["array", "null"],
+                                 "maxItems":10,
+                                 "items":{
+                                    "type": "string",
+                                    "maxLength":20
+                                 }
+                              }
+                           }
+                        },
+                        "startDate":{
+                           "type": ["string", "null"],
+                           "maxLength":24,
+                           "minLength":20
+                        },
+                        "estimatedEndDate":{
+                           "type": ["string", "null"],
+                           "maxLength":24,
+                           "minLength":20
+                        },
+                        "name":{
+                           "type": ["string", "null"],
+                           "maxLength":20
+                        },
+                        "country":{
+                           "type": ["string", "null"],
+                           "maxLength":20
+                        },
+                        "description":{
+                           "type": ["string", "null"],
+                           "maxLength":200
+                        },
+                        "chat":{
+                           "type": ["array", "null"],
+                           "maxItems":200,
+                           "items":{
+                              "type":"object",
+                              "minProperties":3,
+                              "maxProperties":3,
+                              "properties":{
+                                 "from":{
+                                    "type": ["string", "null"],
+                                    "maxLength":20
+                                 },
+                                 "content":{
+                                    "type": ["string", "null"],
+                                    "maxLength":1000
+                                 },
+                                 "timeSent":{
+                                    "type": ["string", "null"],
+                                    "maxLength":24,
+                                    "minLength":20
+                                 }
+                              },
+                              "required":[
+                                 "from",
+                                 "content",
+                                 "timeSent"
+                              ]
+                           }
+                        }
+                     },
+                     "required":[
+                        "id",
+                        "essence",
+                        "startDate",
+                        "estimatedEndDate",
+                        "name",
+                        "country",
+                        "description",
+                        "chat"
+                     ]
+                  }
+               },
+               "required":[
+                  "id",
+                  "firstName",
+                  "lastName",
+                  "enlistmentDate",
+                  "birthDate",
+                  "userName",
+                  "password",
+                  "phoneNumber",
+                  "job",
+                  "codeName",
+                  "weight",
+                  "height",
+                  "homeCountry",
+                  "lockedDate",
+                  "isLocked",
+                  "status",
+                  "isActive",
+                  "mission"
+               ]
+            }
+         },
+         "required":[
+            "login",
+            "validate"
+         ]
+      },
+      "patch":{
+         "type": ["object", "null"],
+         "minProperties":2,
+         "maxProperties":2,
+         "properties":{
+            "sos":{
+               "type": ["array", "null"],
+               "maxItems":20,
+               "items":{
+                  "type": ["string", "null"],
+                  "maxLength":10,
+                  "minLength":10
+               }
+            },
+            "agentStatusUpdate":{
+               "type": ["string", "null"],
+               "maxLength":100
+            }
+         },
+         "required":[
+            "sos",
+            "agentStatusUpdate"
+         ]
+      }
+   },
+   "required":[
+      "get",
+      "patch"
+   ]
+}

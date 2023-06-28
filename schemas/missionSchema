@@ -1,0 +1,75 @@
+{
+   "type": "object",
+   "minProperties":10,
+   "maxProperties":10,
+   "properties":{
+      "mission_key":{
+         "type": ["integer", "null"],
+         "minimum":0,
+         "maximum":1000
+      },
+      "startDate":{
+         "type": ["integer", "null"],
+         "minimum":1000000000000,
+         "maximum":9999999999999
+      },
+      "missionCodeName":{
+         "type": ["string", "null"],
+         "maxLength":20
+      },
+      "country":{
+         "type": ["string", "null"],
+         "maxLength":30
+      },
+      "estimatedDateTime":{
+         "type": ["integer", "null"],
+         "minimum":1000000000000,
+         "maximum":9999999999999
+      },
+      "missionStatus":{
+         "type": ["string", "null"],
+         "maxLength" : 20
+      },
+      "missionEssence":{
+         "type": ["string", "null"],
+         "maxLength" : 20
+      },
+      "description":{
+         "type": ["string", "null"],
+         "maxLength":50
+      },
+      "agent":{
+         "type":["object", "null"],
+         "properties":{
+            "agent_key":{
+               "type": ["integer", "null"],
+               "maximum":1000
+            },
+            "agentCodeName":{
+               "type": ["string", "null"],
+               "maxLength":20
+            }
+         },
+         "required":[
+            "agent_key",
+            "agentCodeName"
+         ]
+      },
+      "toolsSet":{
+         "type": ["array", "null"],
+         "maxItems":10
+      }
+   },
+   "required":[
+      "mission_key",
+      "startDate",
+      "missionCodeName",
+      "country",
+      "estimatedDateTime",
+      "missionStatus",
+      "missionEssence",
+      "description",
+      "agent",
+      "toolsSet"
+   ]
+}
