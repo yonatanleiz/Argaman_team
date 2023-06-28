@@ -3,7 +3,8 @@ import jsonschema
 from jsonschema import validate
 import os
 
-class json_validator:
+
+class JsonValidator:
     '''
     The class validates a json
     '''
@@ -23,7 +24,6 @@ class json_validator:
                 with open(filePath) as schema:
                     self.schemas.append(json.load(schema))
 
-
     def validate_json(self, json_to_validate):
         '''
         @brief: The function receives a json and checks if it valid using the given schemas
@@ -32,7 +32,7 @@ class json_validator:
 
         @return: True if the json is valide, False if not
         '''
-        json_to_validate = json_validator.__string_to_json(json_to_validate)
+        json_to_validate = JsonValidator.__string_to_json(json_to_validate)
         for schema in self.schemas:
             try:
                 validate(instance=json_to_validate, schema=schema)
@@ -52,4 +52,3 @@ class json_validator:
         @return: the json which is created by the given string
         '''
         return json.loads(json_string)
-
