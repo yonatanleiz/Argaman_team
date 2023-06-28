@@ -15,4 +15,3 @@ def main():
 
 if __name__ == '__main__':
     main()
->>>>>>> d1aa8d7 (added validator skeleton, a flask proxy server skeleton and an example main program to run the two proxies)

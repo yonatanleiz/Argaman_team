@@ -1,21 +1,8 @@
-from scapy.all import *
-
-
-def checkSrcAndDst(ipTable, packet):
+def checkSrc(conf_file, src_addr):
     """
-    Checks source (ip and port) and destination couple against allowed ip table.
+    Checks source ip against allowed ip table.
     Returns True if passed check, False otherwise.
     """
-    srcIp = packet[IP].src
-    srcPort = packet[TCP].sport
-    destIp = packet[IP].dst
-    destPort = packet[TCP].dport
-    
-    srcSet = (srcIp, srcPort)
-    destSet = (destIp, destPort)
-    
-    if (srcSet in ipTable):
-        if (destSet == ipTable[srcSet]):
-            return True
-    return False
-
+    with open(confFile) as conf_file:
+        ip_table = conf_file.read()
+    return src_addr in ip_table
