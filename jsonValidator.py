@@ -32,7 +32,7 @@ class JsonValidator:
 
         @return: True if the json is valide, False if not
         '''
-        json_to_validate = JsonValidator.__string_to_json(json_to_validate)
+        #json_to_validate = JsonValidator.__string_to_json(json_to_validate)
         for schema in self.schemas:
             try:
                 validate(instance=json_to_validate, schema=schema)
